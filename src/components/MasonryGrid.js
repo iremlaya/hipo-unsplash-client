@@ -11,14 +11,14 @@ const MasonryGrid = (props) => {
     if (!ids) {
       ids = '0';
     }
-    fetchPhotosByCollections(props.input, ids);
+    // fetchPhotosByCollections(props.input, ids);
     // console.log(props);
-  }, []);
+  }, [props]);
 
   return (
     <div>
       <p>
-        hi
+        {props.input}
       </p>
     </div>
   );
@@ -30,6 +30,7 @@ const mapStateToProps = (state) => ({
   data: state.fetch.data,
   error: state.fetch.error,
   clickedPhoto: state.fetch.clickedPhoto,
+  input: state.search.input,
 });
 
 const mapDispatchToProps = (dispatch) => ({

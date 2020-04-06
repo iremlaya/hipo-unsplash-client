@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   input: 'hello',
-  id: '',
+  id: '0',
 };
 
 const searchReducer = (state = initialState, action) => {

@@ -5,10 +5,12 @@ import {
   CHANGE_COLLECTIONS,
 } from '../actionTypes';
 
-export const changeInput = (input) => ({
-  type: CHANGE_INPUT,
-  payload: input,
-});
+export const changeInput = (input) => (
+
+  {
+    type: CHANGE_INPUT,
+    payload: input,
+  });
 
 
 export const changeCollections = (id = '0') => ({

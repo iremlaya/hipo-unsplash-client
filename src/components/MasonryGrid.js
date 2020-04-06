@@ -6,21 +6,23 @@ import { fetchPhotosByCollections, fetchPhotos } from '../redux/actions/fetchAct
 
 const MasonryGrid = (props) => {
   useEffect(() => {
-    console.log(props);
-    let ids = props.collectionIds;
-    if (!ids) {
-      ids = '0';
-    }
     // fetchPhotosByCollections(props.input, ids);
     // console.log(props);
+
+    async function fetchData() {
+      // You can await here
+      console.log(props);
+      let ids = props.collectionIds;
+      if (!ids) {
+        ids = '0';
+      }
+      await props.fetchPhotos('istanbul', props.page);
+    }
+    fetchData();
   }, [props]);
 
   return (
-    <div>
-      <p>
-        {props.input}
-      </p>
-    </div>
+    <div className="" />
   );
 };
 
@@ -31,6 +33,7 @@ const mapStateToProps = (state) => ({
   error: state.fetch.error,
   clickedPhoto: state.fetch.clickedPhoto,
   input: state.search.input,
+  page: state.fetch.page,
 });
 
 const mapDispatchToProps = (dispatch) => ({

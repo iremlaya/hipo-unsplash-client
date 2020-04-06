@@ -7,10 +7,14 @@ const instance = axios.create({
   headers: { Authorization: `Client-ID ${ACCESS_KEY}` },
 });
 
-const searchPhotos = (query) => instance.get('/search/photos', { params: { query } });
+const searchPhotos = (query, page) => instance.get('/search/photos', { params: { query, page, per_page: 9 } });
 // or axios.get(api , { headers: {"Authorization" : `Bearer ${token}`} })
 // or give client id as param
 
-const searchPhotosByCollections = (query, collections) => instance.get('/search/photos', { params: { query, collections } });
+const searchPhotosByCollections = (query, collections, page) => instance.get('/search/photos', {
+  params: {
+    query, collections, page, per_page: 9,
+  },
+});
 
 export default { searchPhotos, searchPhotosByCollections };

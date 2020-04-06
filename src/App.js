@@ -1,21 +1,15 @@
 import React from 'react';
 
-import service from './services/api/unsplash';
+import MasonryGrid from './components/MasonryGrid';
+import SearchBar from './components/SearchBar';
 
-class App extends React.Component {
-  componentDidMount() {
-    service.searchPhotosByCollections('office', '206').then((res) => console.log(res.data));
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p />
-        </header>
-      </div>
-    );
-  }
-}
+const App = (props) => (
+  <div className="App">
+    <header className="App-header">
+      <SearchBar />
+      <MasonryGrid />
+    </header>
+  </div>
+);
 
 export default App;

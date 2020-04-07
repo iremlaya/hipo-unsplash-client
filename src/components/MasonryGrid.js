@@ -18,8 +18,8 @@ const MasonryGrid = (props) => {
       }
       await props.fetchPhotos('istanbul', props.page);
     }
-    fetchData();
-  }, [props]);
+    // fetchData();
+  }, []);
 
   return (
     <div className="" />

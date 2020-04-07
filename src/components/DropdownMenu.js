@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import FontAwesome from 'react-fontawesome';
 import './DropdownMenu.css';
+
+import { changeCollections } from '../redux/actions/searchActions';
 
 const Dropdown = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCollectionTitle, setSelectedCollectionTitle] = useState('');
+
+  const list = [
+    { id: 0, title: 'featured' },
+    { id: 1, title: 'city' },
+    { id: 2, title: 'cool' },
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -21,33 +30,30 @@ const Dropdown = (props) => {
     window.removeEventListener('click', setIsOpen(false));
   }, []);
 
-
-  const updateCollectionState = (id) => {
-    props.changeCollections(id);
-  };
-
-  const selectCollection = (title, id, stateKey) => {
+  const selectCollection = (title, id) => {
     setIsOpen(false);
     setSelectedCollectionTitle(title);
-    updateCollectionState(id);
+    props.handleCollectionChange(id);
   };
 
   const toggle = () => {
+    console.log('pressed');
     setIsOpen(!isOpen);
   };
+  const handleKeyDown = (e) => {
+    // check keys if you want
+    if (e.keyCode === 13) {
+      toggle();
+    }
+  };
+  // todo : no anonymous function
   return (
-    <div className="dd-wrapper">
-      <div className="dd-header" onClick={() => toggle}>
+    <div className={`dd-wrapper ${isOpen ? 'dd-open' : ''}`} onClick={toggle} onKeyDown={handleKeyDown} role="button" tabIndex={0}>
+      <div className="dd-header">
         {selectedCollectionTitle ? (
           <div className="dd-header-chosen">{selectedCollectionTitle}</div>
         ) : (
           <div className="dd-header-title">Collections</div>
-        )}
-
-        {isOpen ? (
-          <FontAwesome name="angle-up" size="2x" />
-        ) : (
-          <FontAwesome name="angle-down" size="2x" />
         )}
       </div>
       {isOpen && (
@@ -56,11 +62,9 @@ const Dropdown = (props) => {
           <li
             className="dd-list-item"
             key={item.id}
-            onClick={() => selectCollection(item.title, item.id, item.key)}
+            onClick={() => selectCollection(item.title, item.id)}
           >
             {item.title}
-            {' '}
-            {item.selected && <FontAwesome name="check" />}
           </li>
         ))}
       </ul>
@@ -69,4 +73,11 @@ const Dropdown = (props) => {
   );
 };
 
-export default Dropdown;
+const mapStateToProps = (state) => ({
+  id: state.search.id,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCollections: (id) => dispatch(changeCollections(id)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);

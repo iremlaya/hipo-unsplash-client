@@ -3,6 +3,7 @@ import './SearchBar.css';
 import { connect } from 'react-redux';
 
 import { changeInput, changeCollections } from '../redux/actions/searchActions';
+import Dropdown from './DropdownMenu';
 
 const SearchBar = (props) => {
   const [searchText, setSearchText] = useState('');
@@ -14,8 +15,8 @@ const SearchBar = (props) => {
     setSearchText(e.currentTarget.value);
   };
 
-  const handleCollectionChange = (e) => {
-    setSearchCollection(e.currentTarget.value);
+  const handleCollectionChange = (id) => {
+    setSearchCollection(id);
   };
 
   const handleSubmit = () => {
@@ -34,12 +35,7 @@ const SearchBar = (props) => {
             onChange={handleInputChange}
             value={searchText}
           />
-          <input
-            className="collections-input"
-            placeholder="Collections"
-            onChange={handleCollectionChange}
-            value={searchCollection}
-          />
+          <Dropdown handleCollectionChange={handleCollectionChange} />
         </div>
         <button className="search-button" onClick={handleSubmit} type="button">
           SEARCH

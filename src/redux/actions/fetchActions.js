@@ -5,6 +5,7 @@ import {
   FETCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_FAILURE,
   INCREMENT_PAGE,
+  SET_PAGE_DEFAULT,
 } from '../actionTypes';
 
 
@@ -22,12 +23,7 @@ export const fetchPhotosFailure = (error) => ({
   payload: error,
 });
 
-export const incrementPage = () => ({
-  type: INCREMENT_PAGE,
-});
-
 export const fetchPhotosByCollections = (input, collectionIds, page) => (dispatch) => {
-  dispatch(incrementPage());
   dispatch(fetchPhotosRequest());
   service.searchPhotosByCollections(input, collectionIds, page)
     .then((response) => {
@@ -45,13 +41,12 @@ export const fetchPhotosByCollections = (input, collectionIds, page) => (dispatc
 
 
 export const fetchPhotos = (input, page) => (dispatch) => {
-  dispatch(incrementPage());
   dispatch(fetchPhotosRequest());
   service.searchPhotos(input, page)
     .then((response) => {
       // response.data is the Photos
       const photos = response.data;
-      console.log(response);
+      console.log(photos.results);
       dispatch(fetchPhotosSuccess(photos));
     })
     .catch((error) => {

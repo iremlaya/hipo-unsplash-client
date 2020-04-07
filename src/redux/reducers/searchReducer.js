@@ -4,7 +4,7 @@ import {
 } from '../actionTypes';
 
 const initialState = {
-  input: 'hello',
+  input: 'Istanbul',
   id: '0',
 };
 

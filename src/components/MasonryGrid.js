@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 
 import { fetchPhotosByCollections, fetchPhotos } from '../redux/actions/fetchActions';
 
-import { getFilteredResults } from '../redux/selectors/resultSelector';
+import getFilteredResults from '../redux/selectors/resultSelector';
 import Masonry from './Masonry';
 import './MasonryGrid.css';
 
 const MasonryGrid = (props) => {
   const [page, setPage] = useState(0);
+  const [didMount, setDidMount] = useState(false);
   const dummy = [
     {
       id: '0n0AHB1fgTQ',
@@ -116,28 +117,27 @@ const MasonryGrid = (props) => {
 
   ];
 
-  useEffect(() => {
-    async function fetchData() {
-      // You can await here
-      setPage(0); // resetPage
-      let ids = props.collectionIds;
-      if (!ids) {
-        ids = '0';
-      }
-      await props.fetchPhotos('istanbul', '0', page);
+  async function fetchData() {
+    // You can await here
+    setPage(0); // resetPage
+    let ids = props.collectionIds;
+    if (!ids) {
+      ids = '0';
     }
-    fetchData().then(console.log(props.data));
+    await props.fetchPhotos(props.input, ids, page);
+  }
+
+  useEffect(() => setDidMount(true), []);
+
+  useEffect(() => {
+    // fetchData();
   }, [props.input]);
 
   useEffect(() => {
-    async function fetchData() {
-      let ids = props.collectionIds;
-      if (!ids) {
-        ids = '0';
-      }
-      await props.fetchPhotos('istanbul', '0', page);
+    if (didMount) {
+      console.log('page');
+      // fetchData();
     }
-    // fetchData();
   }, [page]);
 
   const incrementPage = () => {
@@ -148,31 +148,20 @@ const MasonryGrid = (props) => {
     setPage(0);
   };
 
-  const renderColumns = () => {
-    const { column, columnAttrs = {}, columnClassName } = this.props;
-    const childrenInColumns = this.itemsInColumns();
-    const columnWidth = `${100 / childrenInColumns.length}%`;
-    let className = columnClassName;
-
-    if (typeof className !== 'string') {
-      this.logDeprecated('The property "columnClassName" requires a string');
-
-      // This is a deprecated default and will be removed soon.
-      if (typeof className === 'undefined') {
-        className = 'my-masonry-grid_column';
-      }
-    }
-  };
-
   return (
-    <div className="masonry-grid-container">
-      <Masonry
-        breakpointCols={3}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {dummy.map((item) => <div key={item.id}><img src={item.urls.small} /></div>)}
-      </Masonry>
+    <div>
+      {props.loading ? <div>sa</div>
+        : (
+          <div className="masonry-grid-container">
+            <Masonry
+              breakpointCols={3}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {dummy.map((item) => <div key={item.id}><img src={item.urls.small} /></div>)}
+            </Masonry>
+          </div>
+        )}
     </div>
 
   );

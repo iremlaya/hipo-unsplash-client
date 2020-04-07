@@ -4,8 +4,6 @@ import {
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_FAILURE,
-  INCREMENT_PAGE,
-  SET_PAGE_DEFAULT,
 } from '../actionTypes';
 
 
@@ -46,7 +44,6 @@ export const fetchPhotos = (input, page) => (dispatch) => {
     .then((response) => {
       // response.data is the Photos
       const photos = response.data;
-      console.log(photos.results);
       dispatch(fetchPhotosSuccess(photos));
     })
     .catch((error) => {

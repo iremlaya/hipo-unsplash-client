@@ -1,21 +1,21 @@
-import { createStructuredSelector } from 'reselect';
+import { createSelector } from 'reselect';
 
-const getResults = (state) => state.fetch.data;
+const getResults = (state) => state.fetch.data.results || [];
 
-export const getFilteredResults = createStructuredSelector(
+const getFilteredResults = createSelector(
   [getResults],
   (results) => {
-    const filteredResults = [];
-
-    console.log(results);
-    results.results.forEach((element) => {
-      filteredResults.push({
-        id: element.id,
-        url: element.urls.small,
-        link: element.links.html,
+    const filtered = [];
+    if (results) {
+      results.forEach((element) => {
+        filtered.push({
+          id: element.id,
+          url: element.urls.small,
+          link: element.links.html,
+        });
       });
-    });
-    return filteredResults;
+    }
+    return filtered;
   },
 );
 

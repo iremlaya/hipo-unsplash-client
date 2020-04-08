@@ -10,6 +10,7 @@
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
+    "re-reselect": "^3.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",

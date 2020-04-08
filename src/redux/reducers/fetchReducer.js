@@ -3,6 +3,9 @@ import {
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_FAILURE,
+  INCREMENT_PAGE,
+  SET_PAGE_ZERO,
+  DECREMENT_PAGE,
 } from '../actionTypes';
 
 
@@ -10,7 +13,7 @@ const initialState = {
   loading: false,
   data: [],
   error: '',
-  clickedPhoto: '',
+  page: 0,
 };
 
 const fetchReducer = (state = initialState, action) => {
@@ -33,6 +36,21 @@ const fetchReducer = (state = initialState, action) => {
         loading: false,
         data: [],
         error: action.payload,
+      };
+    case INCREMENT_PAGE:
+      return {
+        ...state,
+        page: state.page + 1,
+      };
+    case DECREMENT_PAGE:
+      return {
+        ...state,
+        page: state.page - 1,
+      };
+    case SET_PAGE_ZERO:
+      return {
+        ...state,
+        page: 0,
       };
     default: return state;
   }

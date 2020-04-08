@@ -1,11 +1,19 @@
+/* eslint-disable jsx-a11y/alt-text */
 
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPhotosByCollections, fetchPhotos } from '../redux/actions/fetchActions';
+import { fetchPhotosByCollections } from '../redux/actions/fetchActions';
 
 import getFilteredResults from '../redux/selectors/resultSelector';
+import selector from '../redux/selectors/cacheSelector';
+
 import Masonry from './Masonry';
+import Error from './ErrorStatement';
+import NoResult from './NoResult';
+import LoadingIndicator from './LoadingIndicator';
+import Navigation from './Navigation';
+
 import './MasonryGrid.css';
 
 const MasonryGrid = (props) => {
@@ -120,23 +128,23 @@ const MasonryGrid = (props) => {
   async function fetchData() {
     // You can await here
     setPage(0); // resetPage
-    let ids = props.collectionIds;
+    let ids = props.id;
     if (!ids) {
       ids = '0';
     }
-    await props.fetchPhotos(props.input, ids, page);
+    await props.fetchPhotosByCollections(props.input, ids, page);
   }
 
   useEffect(() => setDidMount(true), []);
 
   useEffect(() => {
-    // fetchData();
-  }, [props.input]);
+    fetchData();
+  }, [props.input, props.id]);
 
   useEffect(() => {
     if (didMount) {
       console.log('page');
-      // fetchData();
+      fetchData();
     }
   }, [page]);
 
@@ -147,22 +155,43 @@ const MasonryGrid = (props) => {
   const resetPage = () => {
     setPage(0);
   };
+  const renderData = () => {
+    if (props.loading) {
+      return <LoadingIndicator />;
+    }
+    if (props.error || props.input === '') {
+      return <Error />;
+    }
+    if (props.data && props.data.length !== 0) {
+      console.log(props.data);
+      return (
+        <div className="masonry-grid-container">
+          <Masonry
+            breakpointCols={3}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {props.data.map((item) => (
+              <div key={item.id}>
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <img src={item.url} />
+                </a>
+              </div>
+            ))}
+          </Masonry>
+        </div>
+      );
+    }
+
+    return <NoResult />;
+  };
 
   return (
     <div>
-      {props.loading ? <div>sa</div>
-        : (
-          <div className="masonry-grid-container">
-            <Masonry
-              breakpointCols={3}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
-              {dummy.map((item) => <div key={item.id}><img src={item.urls.small} /></div>)}
-            </Masonry>
-          </div>
-        )}
+      {renderData()}
+      <Navigation />
     </div>
+
 
   );
 };
@@ -172,14 +201,16 @@ const mapStateToProps = (state) => ({
   loading: state.fetch.loading,
   data: getFilteredResults(state),
   error: state.fetch.error,
-  clickedPhoto: state.fetch.clickedPhoto,
+  totalPages: state.fetch.data.total_pages,
+  page: state.fetch.page,
   input: state.search.input,
+  id: state.search.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   // eslint-disable-next-line max-len
-  fetchPhotosByCollections: (input, collectionIds) => dispatch(fetchPhotosByCollections(input, collectionIds)),
-  fetchPhotos: (input) => dispatch(fetchPhotos(input)),
+  fetchPhotosByCollections: (input, collectionIds, page) => dispatch(fetchPhotosByCollections(input, collectionIds, page)),
+
 });
 
 export default connect(

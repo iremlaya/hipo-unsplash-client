@@ -20,6 +20,7 @@ const SearchBar = (props) => {
   };
 
   const handleSubmit = () => {
+    console.log('handle submit:', searchCollection);
     props.changeInput(searchText);
     props.changeCollections(searchCollection);
   };

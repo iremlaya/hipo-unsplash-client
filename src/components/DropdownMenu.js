@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import FontAwesome from 'react-fontawesome';
 import './DropdownMenu.css';
 
 import { changeCollections } from '../redux/actions/searchActions';

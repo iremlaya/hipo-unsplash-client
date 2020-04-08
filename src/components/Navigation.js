@@ -6,43 +6,26 @@ import { incrementPage, decrementPage, setPageZero } from '../redux/actions/fetc
 import './Navigation.css';
 
 const Navigation = (props) => {
-  const handleKeyDownPrev = (e) => {
-    if (e.keyCode === 13) {
-      props.decrementPage();
-    }
-  };
-  const handleKeyDownNext = (e) => {
-    if (e.keyCode === 13) {
-      props.incrementPage();
-    }
-  };
-  const onFirstPage = () => props.page === 0;
+  const onFirstPage = () => props.page === 1;
 
-  const onLastPage = () => props.page === props.totalPages - 1;
+  const onLastPage = () => props.page === props.totalPages;
 
-  if (props.totalPages === 0) {
+  const goToPreviousPage = () => props.decrementPage();
+  const goToNextPage = () => props.incrementPage();
+
+  if (props.totalPages === 0 || props.loading) {
     return null;
   }
 
   return (
-
     <div className="navigation">
-      <span
-        role="button"
-        aria-label="Previous Page"
-        tabIndex="-1"
-        onKeyDown={handleKeyDownPrev}
-        className={onFirstPage ? 'disabled' : 'paginate left'}
-        onClick={props.decrementPage()}
-      />
-      <span
-        role="button"
-        aria-label="Next Page"
-        tabIndex="-2"
-        onKeyDown={handleKeyDownNext}
-        className={onLastPage ? 'paginate left' : 'paginate right'}
-        onClick={props.incrementPage()}
-      />
+
+      <button type="button" className={onFirstPage() ? 'button disabled' : 'button'} onClick={goToPreviousPage}>
+        Previous
+      </button>
+      <button type="button" className={onLastPage() ? 'button disabled' : 'button'} onClick={goToNextPage}>
+        Next
+      </button>
     </div>
   );
 };
@@ -50,6 +33,8 @@ const Navigation = (props) => {
 
 const mapStateToProps = (state) => ({
   totalPages: state.fetch.data.total_pages,
+  loading: state.fetch.loading,
+  page: state.fetch.page,
 });
 
 const mapDispatchToProps = (dispatch) => ({

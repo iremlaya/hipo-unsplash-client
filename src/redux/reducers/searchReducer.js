@@ -4,8 +4,8 @@ import {
 } from '../actionTypes';
 
 const initialState = {
-  input: 'Istanbul',
-  id: '0',
+  input: '',
+  id: '',
 };
 
 const searchReducer = (state = initialState, action) => {

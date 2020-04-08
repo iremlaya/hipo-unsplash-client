@@ -13,7 +13,7 @@ const initialState = {
   loading: false,
   data: [],
   error: '',
-  page: 0,
+  page: 1,
 };
 
 const fetchReducer = (state = initialState, action) => {
@@ -50,7 +50,7 @@ const fetchReducer = (state = initialState, action) => {
     case SET_PAGE_ZERO:
       return {
         ...state,
-        page: 0,
+        page: 1,
       };
     default: return state;
   }

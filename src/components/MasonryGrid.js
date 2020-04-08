@@ -3,21 +3,20 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPhotosByCollections } from '../redux/actions/fetchActions';
+import { fetchPhotosByCollections, setPageZero } from '../redux/actions/fetchActions';
 
 import getFilteredResults from '../redux/selectors/resultSelector';
-import selector from '../redux/selectors/cacheSelector';
 
 import Masonry from './Masonry';
 import Error from './ErrorStatement';
 import NoResult from './NoResult';
 import LoadingIndicator from './LoadingIndicator';
 import Navigation from './Navigation';
+import service from '../services/api/unsplash';
 
 import './MasonryGrid.css';
 
 const MasonryGrid = (props) => {
-  const [page, setPage] = useState(0);
   const [didMount, setDidMount] = useState(false);
   const dummy = [
     {
@@ -126,44 +125,42 @@ const MasonryGrid = (props) => {
   ];
 
   async function fetchData() {
-    // You can await here
-    setPage(0); // resetPage
-    let ids = props.id;
-    if (!ids) {
-      ids = '0';
+    let { id, input } = props;
+    if (!id) {
+      id = '0';
     }
-    await props.fetchPhotosByCollections(props.input, ids, page);
-  }
+    if (!input) {
+      input = 'Istanbul';
+    }
 
-  useEffect(() => setDidMount(true), []);
+    await props.fetchPhotosByCollections(input, id, props.page);
+  }
+  useEffect(() => { setDidMount(true); fetchData(); }, []);
 
   useEffect(() => {
+    props.setPageZero(); // resetPage
     fetchData();
   }, [props.input, props.id]);
-
+  /*
   useEffect(() => {
     if (didMount) {
-      console.log('page');
-      fetchData();
+      console.log('page', props.page);
+      props.fetchPhotosByCollections(props.input, props.id, props.page);
     }
-  }, [page]);
+  }, [props.page]);
+*/
+  useEffect(() => {
+    fetchData();
+  }, [props.page]);
 
-  const incrementPage = () => {
-    setPage(page + 1);
-  };
-
-  const resetPage = () => {
-    setPage(0);
-  };
   const renderData = () => {
     if (props.loading) {
       return <LoadingIndicator />;
     }
-    if (props.error || props.input === '') {
+    if (props.error) {
       return <Error />;
     }
     if (props.data && props.data.length !== 0) {
-      console.log(props.data);
       return (
         <div className="masonry-grid-container">
           <Masonry
@@ -210,7 +207,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   // eslint-disable-next-line max-len
   fetchPhotosByCollections: (input, collectionIds, page) => dispatch(fetchPhotosByCollections(input, collectionIds, page)),
-
+  setPageZero: () => dispatch(setPageZero()),
 });
 
 export default connect(

@@ -43,7 +43,6 @@ export const fetchPhotosByCollections = (input, collectionIds, page) => (dispatc
   // cacheFetch(input, collectionIds, page)
   service.searchPhotosByCollections(input, collectionIds, page).then((response) => {
     // response.data is the Photos
-
     const photos = response.data;
 
     dispatch(fetchPhotosSuccess(photos));

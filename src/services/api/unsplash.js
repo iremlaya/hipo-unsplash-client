@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { BASE_URL } from '../../utils/baseUrl';
-import { ACCESS_KEY } from '../../utils/token';
 
 const instance = axios.create({
   baseURL: BASE_URL,
-  headers: { Authorization: `Client-ID ${ACCESS_KEY}` },
+  headers: { Authorization: `Client-ID ${process.env.REACT_APP_ACCESS_KEY}` },
 });
 
 const searchPhotos = (query, page) => instance.get('/search/photos', { params: { query, page, per_page: 9 } });

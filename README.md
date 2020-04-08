@@ -2,7 +2,7 @@
 
 The task given by Hipo Team aims to replicate a Figma design with full functionality in React.
 
-See live:
+See live (OLDER VERSION BEFORE STYLING FIX!!! Having problems with connecting to firebase at the moment):
 https://hipo-unsplash-client.web.app/
 
 ## Getting Started

@@ -1,0 +1,76 @@
+[debug] [2020-04-08T14:21:11.040Z] ----------------------------------------------------------------------
+[debug] [2020-04-08T14:21:11.042Z] Command:       D:\newprograms\node.exe C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-04-08T14:21:11.043Z] CLI Version:   8.0.2
+[debug] [2020-04-08T14:21:11.043Z] Platform:      win32
+[debug] [2020-04-08T14:21:11.043Z] Node Version:  v12.12.0
+[debug] [2020-04-08T14:21:11.044Z] Time:          Wed Apr 08 2020 17:21:11 GMT+0300 (GMT+03:00)
+[debug] [2020-04-08T14:21:11.044Z] ----------------------------------------------------------------------
+[debug] [2020-04-08T14:21:11.044Z] 
+[debug] [2020-04-08T14:21:11.050Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-08T14:21:11.051Z] > authorizing via signed-in user
+[debug] [2020-04-08T14:21:11.051Z] [iam] checking project hipo-unsplash-client for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-04-08T14:21:11.054Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-04-08T14:21:11.054Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-04-08T14:21:11.322Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 08 Apr 2020 14:22:48 GMT","server":"scaffolding on HTTPServer2","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-08T14:21:11.338Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/hipo-unsplash-client:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-04-08T14:21:13.435Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 08 Apr 2020 14:22:50 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1862","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-08T14:21:13.438Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/hipo-unsplash-client  
+ 
+[debug] [2020-04-08T14:21:19.784Z] <<< HTTP RESPONSE 500 {"vary":"X-Origin, Referer, Origin,Accept-Encoding","content-type":"application/json; charset=UTF-8","date":"Wed, 08 Apr 2020 14:22:56 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-08T14:21:19.784Z] <<< HTTP RESPONSE BODY {"error":{"code":500,"message":"Internal error encountered.","status":"INTERNAL"}}
+[debug] [2020-04-08T14:21:19.786Z] HTTP Error: 500, Internal error encountered.
+[debug] [2020-04-08T14:21:19.788Z] FirebaseError: HTTP Error: 500, Internal error encountered.
+    at module.exports (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Request._callback (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:40:35)
+    at Request.self.callback (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at Request.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1154:10)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at IncomingMessage.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1076:12)
+    at Object.onceWrapper (events.js:299:28)
+    at IncomingMessage.emit (events.js:215:7)
+    at IncomingMessage.EventEmitter.emit (domain.js:476:20)
+    at endReadableNT (_stream_readable.js:1183:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+[error] 
+[error] Error: Failed to get Firebase project hipo-unsplash-client. Please make sure the project exists and your account has permission to access it.
+[debug] [2020-04-08T14:21:41.857Z] ----------------------------------------------------------------------
+[debug] [2020-04-08T14:21:41.859Z] Command:       D:\newprograms\node.exe C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-04-08T14:21:41.859Z] CLI Version:   8.0.2
+[debug] [2020-04-08T14:21:41.859Z] Platform:      win32
+[debug] [2020-04-08T14:21:41.859Z] Node Version:  v12.12.0
+[debug] [2020-04-08T14:21:41.860Z] Time:          Wed Apr 08 2020 17:21:41 GMT+0300 (GMT+03:00)
+[debug] [2020-04-08T14:21:41.860Z] ----------------------------------------------------------------------
+[debug] [2020-04-08T14:21:41.860Z] 
+[debug] [2020-04-08T14:21:41.867Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-04-08T14:21:41.867Z] > authorizing via signed-in user
+[debug] [2020-04-08T14:21:41.867Z] [iam] checking project hipo-unsplash-client for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-04-08T14:21:41.870Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/hipo-unsplash-client:testIamPermissions  
+ {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2020-04-08T14:21:43.926Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Wed, 08 Apr 2020 14:23:20 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=1867","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-08T14:21:43.928Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/hipo-unsplash-client  
+ 
+[debug] [2020-04-08T14:21:50.166Z] <<< HTTP RESPONSE 500 {"vary":"X-Origin, Referer, Origin,Accept-Encoding","content-type":"application/json; charset=UTF-8","date":"Wed, 08 Apr 2020 14:23:27 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"quic=\":443\"; ma=2592000; v=\"46,43\",h3-Q050=\":443\"; ma=2592000,h3-Q049=\":443\"; ma=2592000,h3-Q048=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-04-08T14:21:50.166Z] <<< HTTP RESPONSE BODY {"error":{"code":500,"message":"Internal error encountered.","status":"INTERNAL"}}
+[debug] [2020-04-08T14:21:50.170Z] HTTP Error: 500, Internal error encountered.
+[debug] [2020-04-08T14:21:50.175Z] FirebaseError: HTTP Error: 500, Internal error encountered.
+    at module.exports (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Request._callback (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:40:35)
+    at Request.self.callback (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at Request.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1154:10)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at IncomingMessage.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1076:12)
+    at Object.onceWrapper (events.js:299:28)
+    at IncomingMessage.emit (events.js:215:7)
+    at IncomingMessage.EventEmitter.emit (domain.js:476:20)
+    at endReadableNT (_stream_readable.js:1183:12)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+[error] 
+[error] Error: Failed to get Firebase project hipo-unsplash-client. Please make sure the project exists and your account has permission to access it.
